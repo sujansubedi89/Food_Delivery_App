@@ -24,6 +24,15 @@ A full-stack food delivery application built with the MERN stack, featuring real
 - 📈 **Sales Analytics** - View sales trends and performance metrics
 - 🔔 **Low Stock Alerts** - Email notifications for low inventory
 
+- 🔔 **Low Stock Alerts** - Email notifications for low inventory
+
+## 🌐 Third-Party Integrations
+
+- **🗺️ Leaflet Maps**: Interactive maps for browsing restaurants and pinpointing delivery locations.
+- **💳 Payment Gateways**: Full integration with **Khalti** and **eSewa** for secure digital payments.
+- **📧 Nodemailer**: Reliable email delivery service for authentications and notifications.
+- **📱 Twilio** (Optional): SMS notification support for real-time order updates.
+
 ## 🛠️ Technology Stack
 
 ### Frontend
@@ -55,6 +64,13 @@ Before you begin, ensure you have the following installed:
 - **npm** (comes with Node.js)
 - **MongoDB** (v4.4 or higher) - [Download](https://www.mongodb.com/try/download/community)
 - **Git** - [Download](https://git-scm.com/)
+
+## 📚 Documentation
+
+Detailed documentation for each part of the application can be found here:
+
+- **[Backend Documentation](./backend/README.md)**: API endpoints, database models, and server configuration.
+- **[Frontend Documentation](./frontend/README.md)**: UI components, pages, and client-side logic.
 
 ## 🚀 Installation & Setup
 
