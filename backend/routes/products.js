@@ -15,7 +15,10 @@ router.get('/', async (req, res) => {
         }
 
         if (q) {
-            query.$text = { $search: q };
+            query.$or = [
+                { name: { $regex: q, $options: 'i' } },
+                { description: { $regex: q, $options: 'i' } }
+            ];
         }
 
         const products = await Product.find(query).populate('restaurantId');

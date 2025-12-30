@@ -7,16 +7,18 @@ A full-stack food delivery application built with the MERN stack, featuring real
 ### Customer Features
 - 🔐 **User Authentication** - Register, login, email/phone verification, password reset
 - 🍽️ **Browse Restaurants & Menu** - View restaurants and their food items with detailed information
+- 🔎 **Enhanced Search** - Search for foods with smart regex matching and category filtering
 - 🛒 **Shopping Cart** - Add items to cart, manage quantities, apply coupons
 - 💳 **Multiple Payment Options** - Cash on Delivery, Khalti, and eSewa payment gateways
 - 📦 **Order Tracking** - View order history and current order status
 - 📧 **Email Notifications** - Order confirmations and updates via email
 - 👤 **User Profile** - Manage personal information and delivery addresses
+- 🛡️ **Session Security** - Secure session management with auto-logout on tab close
 - ⭐ **Reviews & Ratings** - Rate and review restaurants and food items
 
 ### Restaurant/Admin Features
 - 📊 **Admin Dashboard** - Comprehensive analytics and statistics
-- 🍕 **Product Management** - Add, edit, delete menu items with image uploads
+- 🍕 **Product Management** - Add, edit, delete menu items with toggle for URL or File Uploads
 - 📋 **Order Management** - View and update order statuses
 - 👥 **User Management** - Manage customer accounts
 - 🏪 **Restaurant Management** - Manage restaurant details and information

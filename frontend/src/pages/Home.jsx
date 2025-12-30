@@ -12,7 +12,7 @@ const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category === selectedCategory ? 'All' : category);
+    navigate(`/products?category=${encodeURIComponent(category)}`);
   };
 
   const handleAddToCart = (product) => {

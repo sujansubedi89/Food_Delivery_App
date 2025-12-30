@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Filter, X } from 'lucide-react';
 import { productAPI } from '../services/api';
 import ProductCard from '../components/ProductCard';
+import { useSearchParams } from 'react-router-dom';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -16,6 +17,18 @@ const Products = () => {
     sort: 'popular'
   });
   const [showFilters, setShowFilters] = useState(false);
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const category = searchParams.get('category');
+    const q = searchParams.get('q'); // If you want to support ?q= from URL too
+    if (category) {
+      setFilters(prev => ({ ...prev, category }));
+    }
+    if (q) {
+      setSearchQuery(q);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     fetchProducts();

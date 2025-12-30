@@ -29,6 +29,9 @@ const Navbar = () => {
               <Link to="/products" className="text-gray-600 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
                 Menu
               </Link>
+              <Link to="/restaurants" className="text-gray-600 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                Restaurants
+              </Link>
               {user && (
                 <Link to="/orders" className="text-gray-600 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
                   Orders

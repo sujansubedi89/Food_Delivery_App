@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import api from '../services/api';
-import { LayoutDashboard, Package, ShoppingBag, Plus, Trash2, TrendingUp, DollarSign, Users, Edit2, CheckCircle, XCircle, X, Save, Store, Tag, Search, Filter, Calendar } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingBag, Plus, Trash2, TrendingUp, DollarSign, Users, Edit2, CheckCircle, XCircle, X, Save, Store, Tag, Search, Filter, Calendar, Upload } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const AdminDashboard = () => {
@@ -67,6 +67,25 @@ const AdminDashboard = () => {
         validTo: '',
         maxDiscount: ''
     });
+
+    const [imageMethod, setImageMethod] = useState('url'); // 'url' or 'upload'
+
+    const handleFileUpload = async (e, callback) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+            const res = await api.post('/upload', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
+            callback(res.data.imageUrl);
+        } catch (err) {
+            alert('Upload failed');
+        }
+    };
 
     useEffect(() => {
         fetchData();
@@ -847,14 +866,40 @@ const AdminDashboard = () => {
                                             {/* Right Column */}
                                             <div className="space-y-4">
                                                 <div>
-                                                    <label className="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
-                                                    <input
-                                                        type="text"
-                                                        value={editingProduct.image || ''}
-                                                        onChange={e => setEditingProduct({ ...editingProduct, image: e.target.value })}
-                                                        className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-                                                        placeholder="https://..."
-                                                    />
+                                                    <label className="block text-sm font-medium text-gray-700 mb-1">Image Source</label>
+                                                    <div className="flex gap-4 mb-2">
+                                                        <label className="flex items-center gap-2 text-sm cursor-pointer">
+                                                            <input type="radio" checked={imageMethod === 'url'} onChange={() => setImageMethod('url')} className="text-orange-600 focus:ring-orange-500" />
+                                                            <span>URL</span>
+                                                        </label>
+                                                        <label className="flex items-center gap-2 text-sm cursor-pointer">
+                                                            <input type="radio" checked={imageMethod === 'upload'} onChange={() => setImageMethod('upload')} className="text-orange-600 focus:ring-orange-500" />
+                                                            <span>Upload</span>
+                                                        </label>
+                                                    </div>
+                                                    {imageMethod === 'url' ? (
+                                                        <input
+                                                            type="text"
+                                                            value={editingProduct.image || ''}
+                                                            onChange={e => setEditingProduct({ ...editingProduct, image: e.target.value })}
+                                                            className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                                                            placeholder="https://..."
+                                                        />
+                                                    ) : (
+                                                        <div className="flex items-center gap-2">
+                                                            <input
+                                                                type="file"
+                                                                accept="image/*"
+                                                                onChange={(e) => handleFileUpload(e, (url) => setEditingProduct({ ...editingProduct, image: url }))}
+                                                                className="block w-full text-sm text-gray-500
+                                                                    file:mr-4 file:py-2 file:px-4
+                                                                    file:rounded-full file:border-0
+                                                                    file:text-sm file:font-semibold
+                                                                    file:bg-orange-50 file:text-orange-700
+                                                                    hover:file:bg-orange-100"
+                                                            />
+                                                        </div>
+                                                    )}
                                                 </div>
                                                 <div>
                                                     <label className="block text-sm font-medium text-gray-700 mb-1">Categories (comma separated)</label>
@@ -952,8 +997,27 @@ const AdminDashboard = () => {
                                 </div>
                                 <div className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
-                                        <input type="text" value={newProduct.image} onChange={e => setNewProduct({ ...newProduct, image: e.target.value })} className="w-full p-2 border rounded-lg" />
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">Image Source</label>
+                                        <div className="flex gap-4 mb-2">
+                                            <label className="flex items-center gap-2 text-sm cursor-pointer">
+                                                <input type="radio" checked={imageMethod === 'url'} onChange={() => setImageMethod('url')} className="text-orange-600 focus:ring-orange-500" />
+                                                <span>URL</span>
+                                            </label>
+                                            <label className="flex items-center gap-2 text-sm cursor-pointer">
+                                                <input type="radio" checked={imageMethod === 'upload'} onChange={() => setImageMethod('upload')} className="text-orange-600 focus:ring-orange-500" />
+                                                <span>Upload</span>
+                                            </label>
+                                        </div>
+                                        {imageMethod === 'url' ? (
+                                            <input type="text" value={newProduct.image} onChange={e => setNewProduct({ ...newProduct, image: e.target.value })} className="w-full p-2 border rounded-lg" placeholder="Image URL" />
+                                        ) : (
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={(e) => handleFileUpload(e, (url) => setNewProduct({ ...newProduct, image: url }))}
+                                                className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100"
+                                            />
+                                        )}
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-1">Categories (comma sep)</label>
