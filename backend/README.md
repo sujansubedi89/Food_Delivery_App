@@ -7,15 +7,17 @@ This is the backend service for the Food Delivery Application, built with Node.j
 ```
 backend/
 ├── config/             # Configuration files (DB connection, etc.)
+├── controllers/        # API Controllers (Auth, etc.) - [NEW]
 ├── middleware/         # Custom middleware (Auth, Error handling)
 ├── models/             # Mongoose Data Models (User, Order, Product, Restaurant)
 ├── routes/             # API Route Definitions
 ├── services/           # Business Logic & External Services (Email, Payment)
+├── utils/              # Utility functions (tokens, helpers) - [NEW]
 ├── scripts/            # Utility scripts (Seeding, Migrations)
 ├── uploads/            # Static file uploads (Images)
 ├── tests/              # Automated tests
 ├── app.js             # Express App Setup
-└── server.js          # Entry point (Server startup)
+├── server.js          # Entry point (Server startup)
 ```
 
 ## 🚀 Getting Started
@@ -68,8 +70,12 @@ backend/
 ## 📡 API Endpoints
 
 ### Auth
-- `POST /api/auth/register` - User Registration
+- `POST /api/auth/signup` - User Registration
 - `POST /api/auth/login` - User Login
+- `POST /api/auth/forgot-password` - Request Password Reset
+- `POST /api/auth/reset-password/:token` - Reset Password
+- `POST /api/auth/send-phone-otp` - Send Phone OTP
+- `POST /api/auth/verify-phone-otp` - Verify Phone OTP
 
 ### Public
 - `GET /api/public/restaurants` - List Restaurants

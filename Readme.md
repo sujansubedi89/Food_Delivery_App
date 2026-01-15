@@ -287,10 +287,12 @@ npm run dev
 food-delivery-app/
 ├── backend/
 │   ├── config/         # Configuration files
+│   ├── controllers/    # API Controllers (Auth, etc.) - [NEW]
 │   ├── middleware/     # Custom middleware (auth, error handling)
 │   ├── models/         # Mongoose models
 │   ├── routes/         # API routes
 │   ├── services/       # Business logic (email, SMS, payments)
+│   ├── utils/          # Utility functions (tokens, helpers) - [NEW]
 │   ├── uploads/        # Uploaded files (product images)
 │   ├── .env.example    # Environment variables template
 │   ├── server.js       # Express server setup
@@ -298,8 +300,9 @@ food-delivery-app/
 ├── frontend/
 │   ├── src/
 │   │   ├── components/ # Reusable React components
+│   │   ├── context/    # React Context (AuthContext)
 │   │   ├── pages/      # Page components
-│   │   ├── services/   # API service layer
+│   │   ├── services/   # API service layer (AuthService, etc.)
 │   │   └── App.jsx     # Main app component
 │   ├── .env.example    # Frontend environment template
 │   └── vite.config.js  # Vite configuration
